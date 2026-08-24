@@ -3,4 +3,4 @@
 
 
 .workAudio{border-top:1px solid #363a34;margin-top:18px;padding-top:16px}.workAudio>span{display:block;color:var(--lime);letter-spacing:1.4px;font-size:8px;margin-bottom:10px}.workAudio audio{display:block;width:100%;height:36px;accent-color:var(--lime)}.realVideo video{cursor:pointer}
-.workReal .realVideo video{object-fit:contain}
+.workReal .realVideo video{object-fit:contain}.realVideo video:fullscreen,.realVideo video:-webkit-full-screen{width:100vw;height:100vh;object-fit:contain!important;background:#000}
