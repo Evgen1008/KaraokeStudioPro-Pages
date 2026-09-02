@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://evgen1008.github.io/KaraokeStudioPro-Pages/sitemap.xml
