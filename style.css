@@ -4,3 +4,14 @@
 
 .workAudio{border-top:1px solid #363a34;margin-top:18px;padding-top:16px}.workAudio>span{display:block;color:var(--lime);letter-spacing:1.4px;font-size:8px;margin-bottom:10px}.workAudio audio{display:block;width:100%;height:36px;accent-color:var(--lime)}.realVideo video{cursor:pointer}
 .workReal .realVideo video{object-fit:contain}.realVideo video:fullscreen,.realVideo video:-webkit-full-screen{width:100vw;height:100vh;object-fit:contain!important;background:#000}
+
+/* Блок отзывов: появится после добавления настоящих отзывов и удаления атрибута hidden. */
+.reviews{border-top:1px solid #d3cfc5}
+.reviewGrid{grid-template-columns:repeat(3,1fr);gap:16px;margin-top:55px;display:grid}
+.reviewCard{border:1px solid #c9c5bb;min-height:260px;padding:28px;display:flex;flex-direction:column}
+.reviewCard blockquote{margin:0;color:#55584f;font:20px/1.45 Georgia,serif}
+.reviewCard footer{border-top:1px solid #d3cfc5;margin-top:auto;padding-top:20px}
+.reviewCard footer b{font:20px Georgia,serif;display:block}
+.reviewCard footer span{color:#777;letter-spacing:1px;margin-top:6px;font-size:8px;display:block}
+@media (max-width:850px){.reviewGrid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.reviewGrid{grid-template-columns:1fr;margin-top:36px}.reviewCard{min-height:220px}}
