@@ -15,3 +15,48 @@
 .reviewCard footer span{color:#777;letter-spacing:1px;margin-top:6px;font-size:8px;display:block}
 @media (max-width:850px){.reviewGrid{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.reviewGrid{grid-template-columns:1fr;margin-top:36px}.reviewCard{min-height:220px}}
+
+/* Улучшение читаемости мелкого текста */
+.kicker,.number{font-size:11px}
+.heroCopy>small{font-size:12px}
+.vinyl blockquote small,
+.chosen mark,
+.priceMain mark,
+.workCover>span,
+.workInfo small,
+.workInfo dt,
+.realVideo>span,
+.contactPerson>span,
+.contactPerson>small,
+.contact form>small,
+.siteFooter>small,
+.workAudio>span,
+.reviewCard footer span{font-size:10px}
+.steps article>b,
+.benefits article>b,
+.cards label,
+.occasionList b,
+.priceGrid article>span,
+.contact label{font-size:10px}
+.steps p,
+.cards p,
+.benefits p,
+.cards li,
+.faq details p,
+.priceGrid p,
+.workInfo>p{font-size:12px}
+.screen,
+.workInfo dd{font-size:10px}
+.karaoke li,
+.priceGrid article>a,
+.payment span,
+.payment p,
+.priceNote,
+.aiNote,
+.worksFoot p,
+.payTitle p,
+.payMethods article p,
+.siteFooter p,
+.siteFooter>a:last-of-type{font-size:11px}
+@media (max-width:700px){.navcta{font-size:10px}}
+@media (max-width:390px){.navcta{font-size:10px}}
