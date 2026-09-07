@@ -155,5 +155,52 @@ orderForm?.addEventListener('submit',function(event){
   }).catch(function () {});
 })();
 </script>
+<script>
+(function () {
+  const endpoint = 'https://golos-history-notify.evgeniy10081975.workers.dev';
+
+  function notifyOnce(key, eventName) {
+    if (sessionStorage.getItem(key)) return;
+    fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: eventName,
+        page: document.title || 'Главная'
+      })
+    }).then(function (response) {
+      if (response.ok) sessionStorage.setItem(key, '1');
+    }).catch(function () {});
+  }
+
+  const pricing = document.getElementById('pricing');
+  if (pricing && !sessionStorage.getItem('golos_history_pricing_notified')) {
+    const pricingObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          reachGoal('pricing_view');
+          notifyOnce('golos_history_pricing_notified', 'pricing_view');
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.25 });
+    pricingObserver.observe(pricing);
+  }
+
+  const form = document.getElementById('orderForm');
+  if (form) {
+    form.addEventListener('focusin', function () {
+      reachGoal('form_start');
+      notifyOnce('golos_history_form_notified', 'form_start');
+    }, { once: true });
+  }
+
+  document.querySelectorAll('a[href*="max.ru"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      notifyOnce('golos_history_max_notified', 'max_click');
+    });
+  });
+})();
+</script>
 </body>
 </html>
