@@ -103,6 +103,15 @@ document.querySelectorAll('audio,video').forEach(media=>{
   media.addEventListener('play',()=>{
     const file=(media.currentSrc||media.querySelector('source')?.src||'').split('/').pop();
     reachGoal('media_play',{media_type:media.tagName.toLowerCase(),media_file:file});
+    fetch('https://golos-history-notify.evgeniy10081975.workers.dev', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        event:'media_play',
+        page:document.title || 'Главная',
+        media:file
+      })
+    }).catch(()=>{});
   },{once:true});
 });
 
