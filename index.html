@@ -92,6 +92,15 @@ resetPagePosition();
 requestAnimationFrame(resetPagePosition);
 addEventListener('pageshow', resetPagePosition);
 
+const SESSION_KEY='golos_history_session_id';
+let GOLOS_SESSION=sessionStorage.getItem(SESSION_KEY);
+if(!GOLOS_SESSION){
+  const bytes=new Uint8Array(2);
+  crypto.getRandomValues(bytes);
+  GOLOS_SESSION=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+  sessionStorage.setItem(SESSION_KEY,GOLOS_SESSION);
+}
+
 const METRIKA_ID=112213235;
 function reachGoal(name,params){
   if(typeof window.ym==='function') window.ym(METRIKA_ID,'reachGoal',name,params||{});
@@ -109,7 +118,8 @@ document.querySelectorAll('audio,video').forEach(media=>{
       body:JSON.stringify({
         event:'media_play',
         page:document.title || 'Главная',
-        media:file
+        media:file,
+        session:GOLOS_SESSION
       })
     }).catch(()=>{});
   },{once:true});
@@ -148,7 +158,8 @@ orderForm?.addEventListener('submit',function(event){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       page: document.title || 'Главная',
-      referrer: source
+      referrer: source,
+      session:GOLOS_SESSION
     })
   }).then(function (response) {
     if (response.ok) sessionStorage.setItem(key, '1');
@@ -166,7 +177,8 @@ orderForm?.addEventListener('submit',function(event){
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         event: eventName,
-        page: document.title || 'Главная'
+        page: document.title || 'Главная',
+        session:GOLOS_SESSION
       })
     }).then(function (response) {
       if (response.ok) sessionStorage.setItem(key, '1');
