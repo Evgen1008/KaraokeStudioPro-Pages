@@ -112,7 +112,7 @@ orderForm?.addEventListener('submit',function(event){
   event.preventDefault();
   const error=this.querySelector('.formError'),data=new FormData(this);
   const plan=String(data.get('plan')||'Не выбран'),customerName=String(data.get('customerName')||''),contact=String(data.get('contact')||''),occasion=String(data.get('occasion')||''),idea=String(data.get('idea')||'Не указано');
-  const message=['Здравствуйте, Евгений! Хочу заказать песню на сайте «Голос истории».','',`Выбранный формат: ${plan}`,`Имя: ${customerName}`,`Телефон или Telegram: ${contact}`,`Событие: ${occasion}`,`Идея: ${idea}`].join('\\n');
+  const message=['Здравствуйте, Евгений! Хочу заказать песню на сайте «Голос истории».','',`Выбранный формат: ${plan}`,`Имя: ${customerName}`,`Телефон или Telegram: ${contact}`,`Событие: ${occasion}`,`Идея: ${idea}`].join('\n');
   reachGoal('form_submit',{selected_plan:plan,occasion:occasion});
   const maxUrl='https://max.ru/u/f9LHodD0cOI10yokd2uFEhbuRlQbrvPo8f5UNcX7BkbQFvby5cihurAZTSA';
   const maxWindow=window.open(maxUrl,'_blank','noopener,noreferrer');
@@ -122,6 +122,29 @@ orderForm?.addEventListener('submit',function(event){
   if(navigator.clipboard?.writeText){navigator.clipboard.writeText(message).then(done).catch(failed);}else{const field=document.createElement('textarea');field.value=message;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();const copied=document.execCommand('copy');field.remove();copied?done():failed();}
   if(!maxWindow)location.href=maxUrl;
 });
+</script>
+<script>
+(function () {
+  const key = 'golos_history_visit_notified';
+  if (sessionStorage.getItem(key)) return;
+
+  let source = 'Прямой переход';
+  if (document.referrer) {
+    try { source = new URL(document.referrer).hostname || document.referrer; }
+    catch (_) { source = document.referrer; }
+  }
+
+  fetch('https://golos-history-notify.evgeniy10081975.workers.dev', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      page: document.title || 'Главная',
+      referrer: source
+    })
+  }).then(function (response) {
+    if (response.ok) sessionStorage.setItem(key, '1');
+  }).catch(function () {});
+})();
 </script>
 </body>
 </html>
